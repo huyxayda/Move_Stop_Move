@@ -359,7 +359,6 @@ GameObject:
   - component: {fileID: 1653464176}
   - component: {fileID: 1653464175}
   - component: {fileID: 3803147033327290442}
-  - component: {fileID: 1653464179}
   m_Layer: 5
   m_Name: Canvas (1)
   m_TagString: Untagged
@@ -468,18 +467,36 @@ MonoBehaviour:
   - Jack5cu
   - Jack 100cu
   cha: {fileID: 1005527402227730376}
---- !u!114 &1653464179
-MonoBehaviour:
+--- !u!1 &532998675192815723
+GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653464173}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73973b384119fad408683088acd7ee8b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8613133984895947195}
+  m_Layer: 0
+  m_Name: HairHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8613133984895947195
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 532998675192815723}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: -0.38, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1005527403054044234}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1005527401064693625
 GameObject:
   m_ObjectHideFlags: 0
@@ -1090,7 +1107,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1005527401697872803}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 1.4999995}
+  m_LocalPosition: {x: 0.27, y: 1, z: 1.02}
   m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
   m_Children: []
   m_Father: {fileID: 1005527402213103543}
@@ -1606,23 +1623,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8d73ef5f8d9a574e922d304e55e7d80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  poolType: 3
   anim: {fileID: 1005527402213103540}
   weaponHolder: {fileID: 1005527401911969452}
   weaponData: {fileID: 11400000, guid: cd4c4f79f5d047b4c81e111a85ac7dde, type: 2}
+  hairHolder: {fileID: 8613133984895947195}
+  hairData: {fileID: 11400000, guid: 2c85126ca72fa5d41ad3ef1e25a159fd, type: 2}
   skin: {fileID: 1005527402213103543}
-  tf: {fileID: 1005527402202876871}
   isAttack: 0
   isRunning: 0
   weapon: 2
   poolType: 2
+  weaponOnHand: {fileID: 0}
   attackRange: 5
   level: 0
   bulletSpawnPoint: {fileID: 1005527401697872800}
   rb: {fileID: 1005527402227730377}
   ground: {fileID: 0}
+  collider: {fileID: 1005527402227730374}
   agent: {fileID: 1005527402227730375}
-  Emanager: {fileID: 0}
   levelManager: {fileID: 0}
+  indicatorPrefab: {fileID: 0}
 --- !u!195 &1005527402227730375
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2842,6 +2863,7 @@ Transform:
   m_LocalScale: {x: 1, y: 0.99999994, z: 0.99999994}
   m_Children:
   - {fileID: 1005527402838692498}
+  - {fileID: 8613133984895947195}
   m_Father: {fileID: 1005527401829757958}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

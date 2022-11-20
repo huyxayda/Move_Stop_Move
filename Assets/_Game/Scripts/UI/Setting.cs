@@ -8,6 +8,8 @@ public class Setting : UICanvas
     {
         Time.timeScale = 0;
         base.Open();
+        UIManager.Instance.CloseUI<GamePlay>();
+
     }
 
     public override void Close()
@@ -18,13 +20,14 @@ public class Setting : UICanvas
     }
     public void ContinueButton()
     {
+        UIManager.Instance.OpenUI<GamePlay>();
         Close();
     }
 
     public void HomeButton()
     {
+        UIManager.Instance.CloseUI<Setting>();
         GameManager.Instance.ChangeState(GameState.MainMenu);
         UIManager.Instance.OpenUI<MainMenu>();
-        UIManager.Instance.CloseUI<Setting>();
     }
 }

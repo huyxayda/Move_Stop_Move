@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class PatrolState : IState<Enemy>
 {
-    
+
     Vector3 moveTarget;
-    //LevelManager levelManager;
+    LevelManager levelManager;
     public void OnEnter(Enemy enemy)
     {
         moveTarget = LevelManager.Instance.ERandomDestination();
+        //Debug.Log(moveTarget);
         enemy.SetDestination(moveTarget);
         enemy.isRunning = true;
     }
@@ -23,7 +24,7 @@ public class PatrolState : IState<Enemy>
         }
         else
         {
-            if (Vector3.Distance(enemy.transform.position, moveTarget) < 0.1f)
+            if (Vector3.Distance(enemy.transform.position, moveTarget) < 0.5f)
             {
                 enemy.ChangeState(new IdleState());
             }

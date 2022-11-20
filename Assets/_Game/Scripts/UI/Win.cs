@@ -7,7 +7,8 @@ public class Win : UICanvas
     public void RetryButton()
     {
         LevelManager.Instance.OnRetry();
-        GameManager.Instance.ChangeState(GameState.MainMenu);
+        UIManager.Instance.OpenUI<GamePlay>();
+        GameManager.Instance.ChangeState(GameState.GamePlay);
 
         Close();
 

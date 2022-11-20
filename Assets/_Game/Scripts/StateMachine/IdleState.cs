@@ -16,7 +16,11 @@ public class IdleState : IState <Enemy>
     public void OnExecute(Enemy enemy)
     {
         timer += Time.deltaTime;
-        if (timer > randomTime)
+        if (enemy.FindTarget() != null)
+        {
+            enemy.ChangeState(new AttackState());
+        }
+        else if (timer > randomTime)
         {
             enemy.ChangeState(new PatrolState());
         }

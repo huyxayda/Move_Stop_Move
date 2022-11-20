@@ -328,6 +328,6 @@ public enum PoolType
 {
     Hammer,
     Knife,
-    Boomerang
-
+    Boomerang,
+    Enemy
 }

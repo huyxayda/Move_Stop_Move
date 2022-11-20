@@ -21,7 +21,7 @@ public class AttackState : IState<Enemy>
         {
             enemy.Shoot(target);
         }
-        if (timer > 1.5f)
+        if (timer > 1f)
         {
             enemy.ChangeState(new PatrolState());
         }

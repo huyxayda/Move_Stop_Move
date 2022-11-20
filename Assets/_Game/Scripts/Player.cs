@@ -27,7 +27,7 @@ public class Player : Character, IHIt
                 //tranh xung dot giua truc y
                 rb.velocity = JoystickControl.direct * speed + rb.velocity.y * Vector3.up;
                 isRunning = true;
-                skin.forward = JoystickControl.direct;
+                TF.forward = JoystickControl.direct;
                 ChangeAnim(Constant.Anim_run);
 
             }

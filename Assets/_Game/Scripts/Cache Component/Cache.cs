@@ -14,4 +14,15 @@ public static class Cache
         }
         return dict[collider];
     }
+
+    static Dictionary<Collider, Camera> cam = new Dictionary<Collider, Camera>();
+
+    public static Camera GetCamera(Collider collider)
+    {
+        if (!cam.ContainsKey(collider))
+        {
+            cam.Add(collider, collider.GetComponent<Camera>());
+        }
+        return cam[collider];
+    }
 }

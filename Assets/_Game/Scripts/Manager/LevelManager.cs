@@ -1,7 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEngine.GraphicsBuffer;
+using static UnityEngine.Networking.UnityWebRequest;
+using Color = System.Drawing.Color;
 
 public class LevelManager : Singleton<LevelManager>
 {
@@ -12,6 +16,7 @@ public class LevelManager : Singleton<LevelManager>
     public int enemyCount;  //so luong enemy da xuat hien
     public int enemyAll;    //tong so luong enemy cua 1 level
     public int enemyRemain; //so luong enemy con lai
+    //public float range = 100f;
 
 
     public List<Enemy> enemies = new List<Enemy>();
@@ -19,6 +24,7 @@ public class LevelManager : Singleton<LevelManager>
     void Start()
     {
         LoadLevel(0);
+        currentLevel.OnInit();
         OnInIt();
         UIManager.Instance.OpenUI<MainMenu>();
     }
@@ -37,17 +43,12 @@ public class LevelManager : Singleton<LevelManager>
             GameManager.Instance.ChangeState(GameState.FinishGame);
         }
 
-        //test navmesh.sampleposition
-        //Vector3 point;
-        //if (RandomPoint(transform.position, range, out point))
-        //{
-        //    Debug.DrawRay(point, Vector3.up, Color.blue, 1.0f);
-        //}
+        
     }
     public void OnInIt()
     {
         enemyCount = 0;
-        player.tf.position = currentLevel.startPoint.position;
+        player.TF.position = currentLevel.startPoint.position;
         player.OnInit();
         //enemyAll = 20;
         enemyRemain = enemyAll;
@@ -95,10 +96,7 @@ public class LevelManager : Singleton<LevelManager>
     public void OnReset()
     {
         //destroy map cu, enemy => load level moi
-        for (int i = 0; i < enemies.Count; i++)
-        {
-            Destroy(enemies[i].gameObject);
-        }
+        SimplePool.CollectAll();
         enemies.Clear();
 
     }
@@ -109,7 +107,6 @@ public class LevelManager : Singleton<LevelManager>
         OnReset();
         LoadLevel(0);
         OnInIt();
-        //UIManager.Instance.OpenUI<MainMenu>();
     }
 
     public void OnNextLevel()
@@ -121,47 +118,45 @@ public class LevelManager : Singleton<LevelManager>
     }
 
     //ham tim diem ngau nhien cho enemy di chuyen
+
     public Vector3 ERandomDestination()
     {
 
         float xPos = Random.Range(currentLevel.cube1.position.x, currentLevel.cube2.position.x);
         float zPos = Random.Range(currentLevel.cube1.position.z, currentLevel.cube2.position.z);
-
-        return new Vector3(xPos, 1.6f, zPos);
+        Vector3 target = new Vector3 (xPos, currentLevel.transform.position.y + 1.75f, zPos);
+        NavMeshHit hit;
+        if (!NavMesh.SamplePosition(target, out hit, 4.0f, NavMesh.AllAreas))
+        {
+            ERandomDestination();
+        }
+        else
+        {
+            target.x = hit.position.x;
+            target.z = hit.position.z;
+        }
+        return target;
 
     }
+    
     //ham tim diem ngau nhien de spawn enemy
     public void RandomPointSpawn()
     {
         float xPos = Random.Range(currentLevel.cube1.position.x, currentLevel.cube2.position.x);
         float zPos = Random.Range(currentLevel.cube1.position.z, currentLevel.cube2.position.z);
-        if (Vector3.Distance(new Vector3(xPos, 2.5f, zPos), player.tf.position) < player.attackRange)
+        Vector3 point = new Vector3(xPos, 2.5f, zPos);
+        NavMeshHit hit;
+        if (Vector3.Distance(point, player.TF.position) < player.attackRange || !NavMesh.SamplePosition(point, out hit, 4.0f, NavMesh.AllAreas))
         {
             RandomPointSpawn();
         }
         else
         {
             Enemy newEnemy;
-            newEnemy = Instantiate(enemy, new Vector3(xPos, 2.5f, zPos), Quaternion.identity);
+            newEnemy = SimplePool.Spawn<Enemy>(enemy, point, Quaternion.identity);
+            newEnemy.ResetEnemy();
             enemies.Add(newEnemy);
             enemyCount++;
         }
-    }
-
-    //public float range = 100f;
-    //bool RandomPoint(Vector3 center, float range, out Vector3 result)
-    //{
-    //    for (int i = 0; i < 30; i++)
-    //    {
-    //        Vector3 randomPoint = center + Random.insideUnitSphere * range;
-    //        NavMeshHit hit;
-    //        if (NavMesh.SamplePosition(randomPoint, out hit, 1.0f, NavMesh.AllAreas))
-    //        {
-    //            result = hit.position;
-    //            return true;
-    //        }
-    //    }
-    //    result = Vector3.zero;
-    //    return false;
-    //}
+    }   
 }

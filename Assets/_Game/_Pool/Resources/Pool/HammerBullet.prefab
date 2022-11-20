@@ -78,10 +78,9 @@ MonoBehaviour:
   poolType: 0
   rb: {fileID: 8197270719510953035}
   spin: {x: 0, y: 0, z: 600}
-  tf: {fileID: 3455070515929588253}
   skin: {fileID: 8439354641542994}
   cha: {fileID: 0}
-  speed: 100
+  speed: 500
   BulletType: 0
 --- !u!1001 &8439354641675730
 PrefabInstance:

@@ -81,7 +81,7 @@ MonoBehaviour:
   tf: {fileID: 3455070515929588253}
   skin: {fileID: 8439354641542994}
   cha: {fileID: 0}
-  speed: 100
+  speed: 300
   BulletType: 0
 --- !u!1001 &8439354641675730
 PrefabInstance:

@@ -6,7 +6,7 @@ public class Bullet : GameUnit
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector3 spin;
-    [SerializeField] private Transform tf;
+    //[SerializeField] private Transform tf;
     [SerializeField] private Transform skin;
 
 
@@ -40,11 +40,15 @@ public class Bullet : GameUnit
     void Update()
     {
         skin.Rotate(spin * Time.deltaTime);
+        if(Vector3.Distance(TF.position,cha.TF.position) > cha.attackRange + 4f)
+        {
+            OnDespawn();
+        }
     }
     public override void OnInit()
     {
-        rb.velocity = Vector3.zero;
-        Invoke(nameof(OnDespawn), 3f);
+        //rb.velocity = Vector3.zero;
+        //Invoke(nameof(OnDespawn), 3f);
     }
 
     public override void OnDespawn()
@@ -56,14 +60,14 @@ public class Bullet : GameUnit
     public void Seek(Transform target)
     {
         this.target = target;
-        dir = target.position - transform.position;
+        dir = (target.position - transform.position).normalized;
         StartBullet();
     }
 
     public void StartBullet()
     {
-        rb.AddForce(dir * speed);
-        //rb.velocity = dir * speed * Time.deltaTime;
+        //rb.AddForce(dir * speed);
+        rb.velocity = dir * speed * Time.deltaTime;
     }
 
     //public void KnifeBullet()
