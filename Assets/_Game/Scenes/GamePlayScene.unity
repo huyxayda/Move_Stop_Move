@@ -1105,6 +1105,11 @@ MonoBehaviour:
   target: {fileID: 1656147314}
   speed: 10
   offset: {x: 0, y: 14, z: -20}
+--- !u!137 &1091968004 stripped
+SkinnedMeshRenderer:
+  m_CorrespondingSourceObject: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
+  m_PrefabInstance: {fileID: 1233502407}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1133201208 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2989701457832414701, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
@@ -1494,7 +1499,7 @@ PrefabInstance:
     - target: {fileID: -529177695146175607, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5ed374824a094fc48851c67666396a3e, type: 2}
+      objectReference: {fileID: 2100000, guid: c81998528e1d60a43aa56a6a29a22fa2, type: 2}
     - target: {fileID: -444521105353760620, guid: 38f9296dc39c27647a0119314baf12a2, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0.000010927092
@@ -2086,7 +2091,9 @@ MonoBehaviour:
   hairHolder: {fileID: 552692849}
   hairData: {fileID: 11400000, guid: 2c85126ca72fa5d41ad3ef1e25a159fd, type: 2}
   colorData: {fileID: 11400000, guid: efadbcb4dd9ee564d9198b54e155934e, type: 2}
+  pantData: {fileID: 11400000, guid: cc8401719c6b8164fac315a7e60287f6, type: 2}
   skinnedMeshRenderer: {fileID: 366759646}
+  pantMesh: {fileID: 1091968004}
   skin: {fileID: 728622196}
   isAttack: 0
   isRunning: 0
