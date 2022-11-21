@@ -9,6 +9,7 @@ public class Setting : UICanvas
         Time.timeScale = 0;
         base.Open();
         UIManager.Instance.CloseUI<GamePlay>();
+        UIManager.Instance.CloseUI<IndicatorCanVas>();
 
     }
 
@@ -21,6 +22,8 @@ public class Setting : UICanvas
     public void ContinueButton()
     {
         UIManager.Instance.OpenUI<GamePlay>();
+        UIManager.Instance.OpenUI<IndicatorCanVas>();
+
         Close();
     }
 

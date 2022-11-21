@@ -40,6 +40,7 @@ public class LevelManager : Singleton<LevelManager>
             LevelManager.Instance.OnFinishGame();
             UIManager.Instance.OpenUI<Win>();
             UIManager.Instance.CloseUI<GamePlay>();
+            UIManager.Instance.CloseUI<IndicatorCanVas>();
             GameManager.Instance.ChangeState(GameState.FinishGame);
         }
 

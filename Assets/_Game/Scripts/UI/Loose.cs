@@ -9,7 +9,8 @@ public class Loose : UICanvas
         LevelManager.Instance.OnRetry();
         GameManager.Instance.ChangeState(GameState.GamePlay);
         UIManager.Instance.OpenUI<GamePlay>();
-        Close();
+        UIManager.Instance.OpenUI<IndicatorCanVas>();
+        UIManager.Instance.CloseUI<Loose>();
     }
 
     public void HomeButton()

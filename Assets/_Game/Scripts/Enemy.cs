@@ -26,35 +26,7 @@ public class Enemy : Character, IHIt
         {
             currentState.OnExecute(this);
         }
-        CheckEnemyOnCamera();
-
-    }
-
-    public void CheckEnemyOnCamera()
-    {
-        Vector2 viewPos = Camera.main.WorldToViewportPoint(TF.position);
-        if (viewPos.x < 1f && viewPos.x > 0f && viewPos.y < 1f && viewPos.y > 0f)
-        {
-            Debug.Log("Nhin thay dich");           
-
-        }
-        else
-        {
-            
-            Debug.Log("khong nhin thay dich");
-            Vector2 targetOnScreen = new Vector2();
-            targetOnScreen.x = Mathf.Clamp(viewPos.x, 0.1f, 0.9f);
-            targetOnScreen.y = Mathf.Clamp(viewPos.y, 0.1f, 0.9f);
-            Vector3 indicatorTargetPos = Camera.main.ViewportToScreenPoint(new Vector3(targetOnScreen.x, targetOnScreen.y, 0));
-            Debug.Log(indicatorTargetPos);
-            float angle = Mathf.Atan2( Screen.width / 2 - targetOnScreen.x, Screen.height / 2 - targetOnScreen.y);
-            Debug.Log(angle);
-            indicatorPrefab.transform.position = indicatorTargetPos;
-            Vector3 IndicatorRotate = new Vector3(0, 0, angle * Mathf.Rad2Deg);
-            Debug.Log("goc Xoay" + IndicatorRotate);
-            //indicatorPrefab.transform.rotation = Quaternion.Euler(0, 0, angle * Mathf.Rad2Deg);
-        }
-    }
+    } 
 
     public override void OnInit()
     {
@@ -78,8 +50,7 @@ public class Enemy : Character, IHIt
     {
         base.OnDespawn();
         //SimplePool.Despawn(this);
-        LevelManager.Instance.enemies.Remove(this);
-        LevelManager.Instance.enemyRemain -- ;
+        MinusEnemy();
     }
 
     public void SetDestination(Vector3 position)
@@ -120,4 +91,9 @@ public class Enemy : Character, IHIt
         
     }
 
+    public void MinusEnemy()
+    {
+        LevelManager.Instance.enemies.Remove(this);
+        LevelManager.Instance.enemyRemain--;
+    }
 }

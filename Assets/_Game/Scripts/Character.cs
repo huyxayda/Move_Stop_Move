@@ -11,10 +11,11 @@ public class Character : GameUnit
     [SerializeField] protected WeaponData weaponData;
     [SerializeField] protected Transform hairHolder;
     [SerializeField] protected HairData hairData;
+    [SerializeField] protected ColorData colorData;
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
 
 
     public Transform skin;
-
     private List<Transform>enemyPos = new List<Transform>();   
     //public Transform TF;
     public bool isAttack = false;
@@ -41,6 +42,7 @@ public class Character : GameUnit
     {
         IsDeath = false;
         CreatHair();
+        ChangeColor();
     }
 
     public override void OnDespawn()
@@ -148,6 +150,12 @@ public class Character : GameUnit
     {
         int randomHair = Random.Range(0, hairData.hair.Count);
         Instantiate(hairData.hair[randomHair], hairHolder);
+    }
+
+    protected void ChangeColor()
+    {
+        int randomColor = Random.Range(0, colorData.colors.Count);
+        skinnedMeshRenderer.material = colorData.colors[randomColor];
     }
 
     public virtual void LevelUp()

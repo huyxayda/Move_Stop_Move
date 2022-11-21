@@ -8,8 +8,9 @@ public class MainMenu : UICanvas
     {
         //vao game va bat gameplayUI, dong UI Mainmenu
         LevelManager.Instance.OnStartGame();
-        UIManager.Instance.OpenUI<GamePlay>();
         UIManager.Instance.CloseUI<MainMenu>();
+        UIManager.Instance.OpenUI<GamePlay>();
+        UIManager.Instance.OpenUI<IndicatorCanVas>();
     }
 
     public void WeaponButton()
