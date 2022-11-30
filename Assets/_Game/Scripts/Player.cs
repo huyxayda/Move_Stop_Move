@@ -9,12 +9,15 @@ public class Player : Character, IHIt
     [SerializeField] private float speed;
     [SerializeField] private Transform shootingRange;
     public LevelManager levelManager;
-
+    public Weapon currentWeapon;
+    public GameObject currentHair;
     private Transform target;
 
     public void Start()
     {
-        OnInit();
+        //OnInit();
+        currentWeapon = CreateWeapon(weapon);
+
     }
 
     private void Update()
@@ -29,7 +32,6 @@ public class Player : Character, IHIt
                 isRunning = true;
                 TF.forward = JoystickControl.direct;
                 ChangeAnim(Constant.Anim_run);
-
             }
 
             if (Input.GetMouseButtonUp(0))
@@ -39,6 +41,7 @@ public class Player : Character, IHIt
                 isRunning = false;
                 ResetShoot();
                 target = FindTarget();
+                Debug.Log(FindTarget());
             }
 
             //shoot
@@ -54,10 +57,10 @@ public class Player : Character, IHIt
     {
         base.OnInit();
         ChangeAnim(Constant.Anim_idle);
-        CreateWeapon(weapon);
         level = 0;
-        attackRange = 10;
+        attackRange = 6f;
         shootingRange.localScale = new Vector3(0.37f, 0.37f, 0.37f) * attackRange;
+        target = null;
     }
 
     public void OnHit()
@@ -70,6 +73,7 @@ public class Player : Character, IHIt
         UIManager.Instance.OpenUI<Loose>();
         UIManager.Instance.CloseUI<GamePlay>();
         GameManager.Instance.ChangeState(GameState.FinishGame);
+        //Debug.Log("trung dan");
     }
 
     public override void LevelUp()
@@ -79,5 +83,33 @@ public class Player : Character, IHIt
         shootingRange.localScale = shootingRange.localScale / (attackRange - 1) * attackRange;
     }
 
-   
+    public void ChangeWeapon(WeaponType weaponType)
+    {
+        if(currentWeapon != null)
+        {
+            Destroy(currentWeapon.gameObject);
+        }
+        currentWeapon = CreateWeapon(weaponType);
+    }
+
+    public void ChangePant(int index)
+    {
+        CreatPant(index);
+    }
+
+    public void ChangeHair(int index)
+    {
+        if(currentHair != null)
+        {
+            Destroy(currentHair.gameObject);
+        }
+        currentHair = CreatHair(index);
+    }
+
+    void OnDrawGizmos()
+    {
+        // Draw a yellow sphere at the transform's position
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(transform.position, attackRange);
+    }
 }

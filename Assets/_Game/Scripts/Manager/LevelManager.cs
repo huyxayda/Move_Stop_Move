@@ -16,14 +16,16 @@ public class LevelManager : Singleton<LevelManager>
     public int enemyCount;  //so luong enemy da xuat hien
     public int enemyAll;    //tong so luong enemy cua 1 level
     public int enemyRemain; //so luong enemy con lai
-    //public float range = 100f;
 
+    public int coinPlayer;
+    private int numberLevel;
 
     public List<Enemy> enemies = new List<Enemy>();
 
     void Start()
     {
-        LoadLevel(0);
+        numberLevel = 1;
+        LoadLevel(numberLevel);
         currentLevel.OnInit();
         OnInIt();
         UIManager.Instance.OpenUI<MainMenu>();
@@ -106,14 +108,15 @@ public class LevelManager : Singleton<LevelManager>
     {
         // xoa map cu, load lai level,setup lai map, mo UI main menu
         OnReset();
-        LoadLevel(0);
+        LoadLevel(numberLevel);
         OnInIt();
     }
 
     public void OnNextLevel()
     {
+        numberLevel++;
         OnReset();
-        LoadLevel(0);
+        LoadLevel(numberLevel);
         OnInIt();
         UIManager.Instance.OpenUI<MainMenu>();
     }
@@ -159,5 +162,36 @@ public class LevelManager : Singleton<LevelManager>
             enemies.Add(newEnemy);
             enemyCount++;
         }
-    }   
+    }
+
+    //ham dung cho shop
+     public void EquipWeapon(WeaponType weapon)
+    {
+        player.ChangeWeapon(weapon);
+        player.weapon = weapon;
+    }
+    public void EquipBullet(PoolType bulletType)
+    {
+        player.WeaponpoolType = bulletType;
+    }
+
+    public void EquipPant(int index)
+    {
+        player.ChangePant(index);
+    }
+
+    public void EquipHair(int index)
+    {
+        player.ChangeHair(index);
+    }
+
+    public void PayCoin(int cost)
+    {
+        coinPlayer = coinPlayer - cost;
+    }
+
+    public void currentCoinPlayer(int coinPlayer)
+    {
+        this.coinPlayer = coinPlayer;
+    }
 }

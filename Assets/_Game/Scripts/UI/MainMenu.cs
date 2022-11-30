@@ -15,11 +15,11 @@ public class MainMenu : UICanvas
 
     public void WeaponButton()
     {
-
+        UIManager.Instance.OpenUI<WeaponShop>();
     }
 
     public void SkinButton()
     {
-
+        UIManager.Instance.OpenUI<SkinShop>();
     }
 }

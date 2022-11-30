@@ -8,6 +8,8 @@ using static UnityEngine.GraphicsBuffer;
 public class Enemy : Character, IHIt
 {
     [SerializeField] private Rigidbody rb;
+    //[SerializeField] private Player player;
+
 
     public Transform ground;
     public Collider collider;
@@ -32,16 +34,21 @@ public class Enemy : Character, IHIt
     {
         base.OnInit();
         //random weapon cho enemy tai thoi diem bat dau
-        int randonWeapon = Random.Range(0, 3);
-        weapon = (WeaponType)randonWeapon;
-        poolType = (PoolType)randonWeapon;
+        int randomWeapon = Random.Range(0, 3);
+        weapon = (WeaponType)randomWeapon;
+        WeaponpoolType = (PoolType)randomWeapon;
         ChangeState(new IdleState());
         CreateWeapon(weapon);
+        int randomHair = Random.Range(0, hairData.hair.Count);
+        int randomPant = Random.Range(0, pantData.pants.Count);
+        CreatHair(randomHair);
+        CreatPant(randomPant);
     }
 
     public void ResetEnemy()
     {
         //reset lai enemy khi duoc lay ra khoi pool
+        level = 0;
         collider.enabled = true;
         ChangeState(new IdleState());
     }

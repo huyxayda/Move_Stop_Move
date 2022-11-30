@@ -14,5 +14,5 @@ public class Constant
     public const string Anim_dead = "dead";
 
     public const string Tag_character = "Character";
-
+    public const string Tag_obstacles = "Obstacles";
 }

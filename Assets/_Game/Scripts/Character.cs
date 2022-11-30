@@ -12,8 +12,10 @@ public class Character : GameUnit
     [SerializeField] protected Transform hairHolder;
     [SerializeField] protected HairData hairData;
     [SerializeField] protected ColorData colorData;
-    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] protected PantData pantData;
 
+    [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
+    [SerializeField] private SkinnedMeshRenderer pantMesh;
 
     public Transform skin;
     private List<Transform>enemyPos = new List<Transform>();   
@@ -23,8 +25,7 @@ public class Character : GameUnit
     private float time;
 
     public WeaponType weapon;
-    public PoolType poolType;
-    public GameObject weaponOnHand;
+    public PoolType WeaponpoolType;
     public float attackRange;
 
     private string currentAnimName;
@@ -41,8 +42,7 @@ public class Character : GameUnit
     public override void OnInit()
     {
         IsDeath = false;
-        CreatHair();
-        ChangeColor();
+        
     }
 
     public override void OnDespawn()
@@ -93,7 +93,6 @@ public class Character : GameUnit
 
     public void Shoot(Transform targetPos)
     {
-        targetPos = FindTarget();
         if(targetPos != null)
         {
             //xoay nhan vat
@@ -107,7 +106,7 @@ public class Character : GameUnit
             if (time > 0.3f)
             {
                 isAttack = true;
-                Bullet bullet = CreateBullet(poolType);
+                Bullet bullet = CreateBullet(WeaponpoolType);
                 if (bullet != null)
                 {
                     bullet.OnInit();
@@ -130,32 +129,31 @@ public class Character : GameUnit
     }
 
     //ham khoi tao weapon cho nhan vat
-    protected void CreateWeapon(WeaponType weapon)
+    public Weapon CreateWeapon(WeaponType weapon)
     {
-        Instantiate(weaponData.GetWeapon(weapon), weaponHolder);
+        return Instantiate(weaponData.GetWeapon(weapon), weaponHolder);
     }
 
     //ham khoi tao bullet
-    protected Bullet CreateBullet(PoolType poolType)
+    public Bullet CreateBullet(PoolType poolType)
     {
         return SimplePool.Spawn<Bullet>(poolType, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
         //return Instantiate(weaponData.GetBullet(weapon), bulletSpawnPoint);
     }
-    //protected Bullet CreateBullet(WeaponType weapon)
-    //{
-    //    return Instantiate(weaponData.GetBullet(weapon), bulletSpawnPoint.position, bulletSpawnPoint.rotation);
-    //}
 
-    protected void CreatHair()
+    public GameObject CreatHair(int randomHair)
     {
-        int randomHair = Random.Range(0, hairData.hair.Count);
-        Instantiate(hairData.hair[randomHair], hairHolder);
+        return Instantiate(hairData.hair[randomHair], hairHolder);
     }
 
-    protected void ChangeColor()
+    public void CreatPant(int randomPant)
     {
-        int randomColor = Random.Range(0, colorData.colors.Count);
-        skinnedMeshRenderer.material = colorData.colors[randomColor];
+        pantMesh.material = pantData.pants[randomPant];
+    }
+    public void ChangeColor()
+    {
+        int randomPant = Random.Range(0, hairData.hair.Count);
+        Instantiate(hairData.hair[randomPant], hairHolder);
     }
 
     public virtual void LevelUp()

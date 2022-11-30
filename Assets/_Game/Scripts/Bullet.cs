@@ -6,7 +6,6 @@ public class Bullet : GameUnit
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private Vector3 spin;
-    //[SerializeField] private Transform tf;
     [SerializeField] private Transform skin;
 
 
@@ -17,25 +16,6 @@ public class Bullet : GameUnit
 
     public float speed = 100f;
     public WeaponType BulletType;
-
-    
-    void Start()
-    {
-        //if (BulletType == WeaponType.Knife)
-        //{
-        //    KnifeBullet();
-        //}
-
-        //if (BulletType == WeaponType.Hammer)
-        //{
-        //    HammerBullet();
-        //}
-
-        //if (BulletType == WeaponType.Boomerang)
-        //{
-        //    BoomerangBullet();
-        //}
-    }
 
     void Update()
     {
@@ -60,34 +40,14 @@ public class Bullet : GameUnit
     public void Seek(Transform target)
     {
         this.target = target;
-        dir = (target.position - transform.position).normalized;
-        StartBullet();
+        dir = (this.target.position - transform.position).normalized;
+        StartBullet(dir);
     }
 
-    public void StartBullet()
+    public void StartBullet(Vector3 direct)
     {
-        //rb.AddForce(dir * speed);
-        rb.velocity = dir * speed * Time.deltaTime;
+        rb.velocity = direct * speed * Time.deltaTime;
     }
-
-    //public void KnifeBullet()
-    //{
-    //    StartBullet();
-    //}
-
-    //public void HammerBullet()
-    //{
-    //    StartBullet();
-    //}
-
-    //public void BoomerangBullet()
-    //{
-    //    //if(Vector3.Distance(tf.position, target.position) < 0.1f)
-    //    //{
-    //    //    target = throwPoint;
-    //    //}
-    //    StartBullet();
-    //}
     private void OnTriggerEnter(Collider other)
     {
         //IHIt hit = other.GetComponent<IHIt>();
@@ -98,5 +58,11 @@ public class Bullet : GameUnit
             OnDespawn();
             cha.LevelUp();
         }
+
+        if (other.CompareTag(Constant.Tag_obstacles))
+        {
+            OnDespawn();
+        }
     }
+    
 }

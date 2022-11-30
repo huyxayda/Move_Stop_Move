@@ -80,7 +80,7 @@ MonoBehaviour:
   spin: {x: 0, y: 0, z: 600}
   skin: {fileID: 8439354641542994}
   cha: {fileID: 0}
-  speed: 1000
+  speed: 500
   BulletType: 0
 --- !u!1001 &8439354641675730
 PrefabInstance:

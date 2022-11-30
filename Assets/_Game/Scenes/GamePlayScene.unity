@@ -2098,15 +2098,16 @@ MonoBehaviour:
   isAttack: 0
   isRunning: 0
   weapon: 0
-  poolType: 0
-  weaponOnHand: {fileID: 0}
-  attackRange: 10
+  WeaponpoolType: 0
+  attackRange: 6
   level: 0
   bulletSpawnPoint: {fileID: 2003922374}
   rb: {fileID: 1656147312}
   speed: 10
   shootingRange: {fileID: 1400092201}
   levelManager: {fileID: 1878024462}
+  currentWeapon: {fileID: 0}
+  currentHair: {fileID: 0}
 --- !u!54 &1656147312
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2266,8 +2267,9 @@ MonoBehaviour:
   enemy: {fileID: 1005527402227730376, guid: 3e6b755242798564eac260b08801f7d7, type: 3}
   player: {fileID: 1656147311}
   enemyCount: 0
-  enemyAll: 20
+  enemyAll: 10
   enemyRemain: 0
+  coinPlayer: 100
   enemies: []
 --- !u!4 &1878024463
 Transform:

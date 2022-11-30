@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pooledObject: {fileID: 114082041123525444, guid: 09cefc679ac23c54aa919111d8f3fc40, type: 3}
-  pooledAmount: 10
+  pooledAmount: 20
   willGrow: 1
 --- !u!114 &6103772117305136671
 MonoBehaviour:

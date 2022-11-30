@@ -1631,13 +1631,14 @@ MonoBehaviour:
   hairHolder: {fileID: 8613133984895947195}
   hairData: {fileID: 11400000, guid: 2c85126ca72fa5d41ad3ef1e25a159fd, type: 2}
   colorData: {fileID: 11400000, guid: efadbcb4dd9ee564d9198b54e155934e, type: 2}
+  pantData: {fileID: 11400000, guid: cc8401719c6b8164fac315a7e60287f6, type: 2}
   skinnedMeshRenderer: {fileID: 1005527402298721358}
+  pantMesh: {fileID: 1005527402534462421}
   skin: {fileID: 1005527402213103543}
   isAttack: 0
   isRunning: 0
   weapon: 2
-  poolType: 2
-  weaponOnHand: {fileID: 0}
+  WeaponpoolType: 2
   attackRange: 5
   level: 0
   bulletSpawnPoint: {fileID: 1005527401697872800}
@@ -1681,8 +1682,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 411060de4483b5e4c9847cd3cbc18554, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetColor: {r: 0.21960786, g: 0.21960786, b: 0.21960786, a: 1}
-  needBoxIndicator: 0
+  targetColor: {r: 0.9056604, g: 0.14866497, b: 0.14866497, a: 1}
+  needBoxIndicator: 1
   needArrowIndicator: 1
   needDistanceText: 0
   indicator: {fileID: 0}
